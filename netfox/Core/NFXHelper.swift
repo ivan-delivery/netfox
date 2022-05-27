@@ -337,7 +337,9 @@ struct NFXPath {
     
     static let sessionLogName = "session.log"
     static let tmpDirURL = URL(fileURLWithPath: NSTemporaryDirectory())
-    static let nfxDirURL = tmpDirURL.appendingPathComponent("NFX", isDirectory: true)
+    static let nfxDirURL = tmpDirURL
+    .appendingPathComponent("NFX", isDirectory: true)
+    .appendingPathComponent(NFX.swiftSharedInstance.sessionName, isDirectory: true)
     static let sessionLogURL = nfxDirURL.appendingPathComponent(sessionLogName)
     
     static func createNFXDirIfNotExist() {

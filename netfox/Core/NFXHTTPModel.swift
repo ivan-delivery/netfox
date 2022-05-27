@@ -95,7 +95,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     }
     
     func saveRequestBodyData(_ data: Data) {
-        let tempBodyString = String.init(data: data, encoding: String.Encoding.utf8)
+        let tempBodyString = String.init(data: data, encoding: .utf8)
         self.requestBodyLength = data.count
         if (tempBodyString != nil) {
             saveData(tempBodyString!, to: getRequestBodyFileURL())
@@ -109,7 +109,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
             bodyString = data.base64EncodedString(options: .endLineWithLineFeed)
 
         } else {
-            if let tempBodyString = String(data: data, encoding: String.Encoding.utf8) {
+            if let tempBodyString = String(data: data, encoding: .utf8) {
                 bodyString = tempBodyString
             }
         }
@@ -125,7 +125,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         guard let contentType = contentType,
               let output = prettyPrint(rawData, type: .init(contentType: contentType))
         else {
-            return String(data: rawData, encoding: String.Encoding.utf8) ?? ""
+            return String(data: rawData, encoding: .utf8) ?? ""
         }
         
         return output
@@ -198,7 +198,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
             do {
                 let rawJsonData = try JSONSerialization.jsonObject(with: rawData, options: [])
                 let prettyPrintedString = try JSONSerialization.data(withJSONObject: rawJsonData, options: [.prettyPrinted])
-                return String(data: prettyPrintedString, encoding: String.Encoding.utf8)
+                return String(data: prettyPrintedString, encoding: .utf8)
             } catch {
                 return nil
             }

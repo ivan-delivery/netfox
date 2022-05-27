@@ -51,7 +51,8 @@ open class NFX: NSObject {
     fileprivate var lastVisitDate: Date = Date()
     
     internal var cacheStoragePolicy = URLCache.StoragePolicy.notAllowed
-    
+    internal var sessionName: String = "default_session"
+
     // swiftSharedInstance is not accessible from ObjC
     class var swiftSharedInstance: NFX {
         struct Singleton {
@@ -70,12 +71,13 @@ open class NFX: NSObject {
         case custom
     }
 
-    @objc open func start() {
+    @objc open func start(sessionName: String = "default_session") {
         guard !started else {
             showMessage(Constants.alreadyStartedMessage.rawValue)
             return
         }
 
+        self.sessionName = sessionName
         started = true
         URLSessionConfiguration.implementNetfox()
         register()
